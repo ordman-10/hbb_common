@@ -897,7 +897,11 @@ impl Config {
     }
 
     pub fn get_rendezvous_server() -> String {
-        let mut rendezvous_server = EXE_RENDEZVOUS_SERVER.read().unwrap().clone();
+    #    let mut rendezvous_server = EXE_RENDEZVOUS_SERVER.read().unwrap().clone();
+
+        // read from ini
+        let Some(rendezvous_server) = read_option("ip");
+        
         if rendezvous_server.is_empty() {
             rendezvous_server = Self::get_option("custom-rendezvous-server");
         }
