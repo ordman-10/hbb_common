@@ -20,6 +20,8 @@ use sha2::{Digest, Sha256};
 use sodiumoxide::base64;
 use sodiumoxide::crypto::sign;
 
+use crate::common::read_option;
+
 use crate::{
     compress::{compress, decompress},
     log,
@@ -1185,8 +1187,17 @@ impl Config {
     }
 
     pub fn get_id() -> String {
-        let mut id = CONFIG.read().unwrap().id.clone();
-        if id.is_empty() {
+        //let mut id = CONFIG.read().unwrap().id.clone();
+        if let Some(id) = read_option("id") 
+        {
+            if !id.is_empty() 
+            {
+                return id;
+            }
+        }
+        
+        if id.is_empty() 
+        {
             if let Some(tmp) = Config::gen_id() {
                 id = tmp;
                 Config::set_id(&id);
