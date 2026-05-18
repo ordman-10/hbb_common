@@ -20,7 +20,7 @@ use sha2::{Digest, Sha256};
 use sodiumoxide::base64;
 use sodiumoxide::crypto::sign;
 
-# use crate::common::read_option;
+// use crate::common::read_option;
 
 use crate::{
     compress::{compress, decompress},
@@ -900,7 +900,7 @@ impl Config {
         let mut rendezvous_server = EXE_RENDEZVOUS_SERVER.read().unwrap().clone();
 
         // read from ini
-      #  let Some(rendezvous_server) = read_option("ip");
+        //let Some(rendezvous_server) = read_option("ip");
         
         if rendezvous_server.is_empty() {
             rendezvous_server = Self::get_option("custom-rendezvous-server");
